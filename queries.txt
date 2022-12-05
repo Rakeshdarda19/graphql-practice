@@ -1,0 +1,121 @@
+// union
+
+mutation {
+  register {
+    ... on ValidationError {
+      field
+      msg
+    }
+    ... on TimeoutError {
+      reason
+      seconds
+    }
+  }
+}
+
+
+
+-------------------------------------------------------------------
+query GetAllUsers {
+  users {
+    id
+    name
+    age
+    nationality
+  }
+}
+--------------------------------
+// use of nested objects
+query GetAllUsers {
+  users {
+    id
+    name
+    age
+    nationality
+    friends {
+      name
+      age
+    }
+  }
+ ------------------------------------------
+ // find by id
+ query GetUser($userId: ID!) {
+  user(id: $userId) {
+    name
+    age
+    nationality
+  }
+}
+
+// variables
+
+{
+  "userId": 4
+}
+-----------------------------------------------
+query GetAllMovies {
+  movies {
+    id
+    name
+    isInTheaters
+    yearOfPublication
+  }
+}
+
+------------------------------------------------
+
+query GetMovie($name: String!) {
+  movie(name: $name) {
+    name
+    yearOfPublication
+    isInTheaters
+  }
+}
+
+
+// variables
+
+{
+  "name": "superbad"
+}
+------------------------------------------
+query GetUser($userId: ID!) {
+  user(id: $userId) {
+    name
+    age
+    nationality
+    friends {
+      name
+    }
+    favouriteMovies {
+      name
+      yearOfPublication
+      isInTheaters
+    }
+  }
+}
+
+----------------------------------------------
+// create user
+
+mutation CreateUser($CreateUserInput: CreateUserInput!) {
+  createUser(input: $CreateUserInput) {
+    id
+    name
+    age
+  }
+}
+
+// variables
+
+
+   "CreateUserInput" : 
+  {
+  "name": "Rakesh",
+   "username" : "rakesh19",
+   "age" : 20
+}
+   
+}
+
+------------------------------------------------------
